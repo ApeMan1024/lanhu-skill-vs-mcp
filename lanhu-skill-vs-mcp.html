@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lanhu-design-to-html Skill 介绍 · 与 lanhu-mcp 对比</title>
+<style>
+@font-face { font-family:'Outfit'; src:url('./_shared/fonts/Outfit-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Outfit'; src:url('./_shared/fonts/Outfit-Bold.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'JetBrainsMono'; src:url('./_shared/fonts/JetBrainsMono-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'JetBrainsMono'; src:url('./_shared/fonts/JetBrainsMono-Bold.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
+
+:root{
+  --bg:#FAF8F6;
+  --bg2:#FFFFFF;
+  --ink:#1B1A2B;
+  --muted:#6B6A7B;
+  --rule:#E6E2DC;
+  --accent:#FF5F00;      /* 蓝湖橙，呼应设计稿主色 */
+  --accent2:#2E5BFF;     /* 技术/MCP 蓝 */
+  --accent3:#1AA97E;     /* skill 绿 */
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Outfit,-apple-system,Segoe UI,Roboto,sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{ max-width:920px; margin:0 auto; padding:0 24px; }
+
+/* ===== HERO ===== */
+.hero{
+  background:linear-gradient(150deg,#1B1A2B 0%,#2A2238 55%,#3a2a1e 100%);
+  color:#fff;
+  padding:72px 0 64px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:""; position:absolute; right:-80px; top:-80px; width:360px; height:360px;
+  background:radial-gradient(circle,rgba(255,95,0,.35) 0%,transparent 70%);
+  border-radius:50%;
+}
+.hero .wrap{ position:relative; z-index:1; }
+.hero .kicker{
+  display:inline-block; font-family:JetBrainsMono,monospace; font-size:12px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--accent);
+  border:1px solid rgba(255,95,0,.5); padding:5px 12px; border-radius:999px; margin-bottom:22px;
+}
+.hero h1{
+  font-family:Outfit,"PingFang SC",sans-serif; font-weight:700;
+  font-size:44px; line-height:1.18; letter-spacing:-.01em; margin-bottom:18px;
+}
+.hero h1 .grad{ background:linear-gradient(90deg,var(--accent),#FFB771); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.hero p.lead{ font-size:18px; color:#cfcce4; max-width:640px; line-height:1.7; }
+.hero .meta-row{ display:flex; flex-wrap:wrap; gap:10px 28px; margin-top:30px; font-size:13px; color:#9b98b3; font-family:JetBrainsMono,monospace; }
+.hero .meta-row span b{ color:#fff; font-weight:700; }
+
+/* ===== SECTION ===== */
+section{ padding:56px 0; border-top:1px solid var(--rule); }
+section:first-of-type{ border-top:none; }
+h2{
+  font-family:Outfit,"PingFang SC",sans-serif; font-weight:700; font-size:30px;
+  letter-spacing:-.01em; margin-bottom:8px; color:var(--ink);
+}
+h2 .num{ font-family:JetBrainsMono,monospace; font-size:15px; color:var(--accent); margin-right:10px; vertical-align:middle; }
+.h2-sub{ color:var(--muted); font-size:15px; margin-bottom:30px; }
+h3{
+  font-family:Outfit,"PingFang SC",sans-serif; font-weight:700; font-size:20px;
+  margin:32px 0 14px; color:var(--ink); display:flex; align-items:center; gap:9px;
+}
+h3 .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); flex:none; }
+h3.alt .dot{ background:var(--accent2); }
+p{ margin-bottom:14px; }
+strong{ font-weight:700; color:var(--ink); }
+mark.key{ background:none; color:var(--accent); font-weight:700; }
+mark.key2{ background:none; color:var(--accent2); font-weight:700; }
+
+ul{ margin:6px 0 16px 0; list-style:none; }
+ul li{ position:relative; padding-left:22px; margin-bottom:9px; }
+ul li::before{ content:""; position:absolute; left:4px; top:11px; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+ul.alt li::before{ background:var(--accent2); }
+code, .code{ font-family:JetBrainsMono,monospace; font-size:.88em; background:rgba(46,91,255,.08); color:var(--accent2); padding:2px 6px; border-radius:5px; }
+pre{ font-family:JetBrainsMono,monospace; font-size:13px; background:#1B1A2B; color:#e7e4f3; padding:18px 20px; border-radius:10px; overflow-x:auto; line-height:1.6; margin:14px 0; }
+pre .c{ color:#8a87a3; }
+
+/* ===== CARDS ===== */
+.card{ background:var(--bg2); border:1px solid var(--rule); border-radius:14px; padding:24px 26px; margin:14px 0; }
+.card.accent-l{ border-left:4px solid var(--accent3); }
+.card.accent-b{ border-left:4px solid var(--accent2); }
+.card h4{ font-family:Outfit,"PingFang SC",sans-serif; font-weight:700; font-size:16px; margin-bottom:8px; }
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:22px 0; }
+.mini-card{ background:var(--bg2); border:1px solid var(--rule); border-radius:12px; padding:18px 20px; }
+.mini-card .tag{ font-family:JetBrainsMono,monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; margin-bottom:6px; }
+.mini-card .tag.g{ color:var(--accent3); }
+.mini-card .tag.b{ color:var(--accent2); }
+.mini-card .ttl{ font-weight:700; font-size:15px; margin-bottom:6px; }
+.mini-card .dsc{ font-size:13.5px; color:var(--muted); line-height:1.6; }
+
+/* callout */
+.callout{ background:rgba(255,95,0,.07); border-left:4px solid var(--accent); border-radius:0 10px 10px 0; padding:16px 20px; margin:18px 0; }
+.callout .t{ font-weight:700; margin-bottom:4px; }
+.callout.blue{ background:rgba(46,91,255,.07); border-left-color:var(--accent2); }
+
+/* workflow steps */
+.steps{ counter-reset:step; margin:18px 0; }
+.steps .step{ display:flex; gap:16px; margin-bottom:14px; }
+.steps .step .n{ counter-increment:step; flex:none; width:34px; height:34px; border-radius:50%; background:var(--accent); color:#fff; font-family:JetBrainsMono,monospace; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; }
+.steps .step .n::before{ content:counter(step); }
+.steps .step .body{ flex:1; }
+.steps .step .body .t{ font-weight:700; margin-bottom:2px; }
+.steps .step .body .d{ font-size:14px; color:var(--muted); }
+
+/* ===== TABLE ===== */
+.table-wrap{ overflow-x:auto; overflow-y:auto; max-height:640px; border:1px solid var(--rule); border-radius:12px; margin:18px 0; }
+table{ width:100%; border-collapse:collapse; font-size:14px; min-width:680px; background:var(--bg2); }
+thead th{ background:#F3EFEA; text-align:left; padding:13px 16px; font-weight:700; font-size:13px; color:var(--ink); border-bottom:2px solid var(--rule); position:sticky; top:0; }
+thead th.sk{ color:var(--accent3); }
+thead th.mc{ color:var(--accent2); }
+tbody td{ padding:12px 16px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.6; }
+tbody tr:last-child td{ border-bottom:none; }
+tbody td.label{ font-weight:700; color:var(--ink); background:#FBF9F6; }
+tbody td.sk{ color:var(--accent3); }
+tbody td.mc{ color:var(--accent2); }
+.yes{ color:var(--accent3); font-weight:700; }
+.no{ color:#c0392b; font-weight:700; }
+.mid{ color:var(--muted); }
+
+/* badge */
+.badge{ display:inline-block; font-family:JetBrainsMono,monospace; font-size:11px; padding:3px 9px; border-radius:999px; font-weight:700; }
+.badge.skill{ background:rgba(26,169,126,.13); color:var(--accent3); }
+.badge.mcp{ background:rgba(46,91,255,.13); color:var(--accent2); }
+
+/* diagram */
+.diagram{ margin:22px 0; text-align:center; }
+.diagram .mermaid-box{ background:var(--bg2); border:1px solid var(--rule); border-radius:12px; padding:22px; }
+.diagram figcaption{ font-size:13px; color:var(--muted); margin-top:10px; }
+
+/* chart figure */
+.chart-figure{ margin:22px 0; }
+.chart-figure figcaption{ font-size:14px; font-weight:700; color:var(--ink); margin-bottom:10px; }
+.chart-figure .ctn{ background:var(--bg2); border:1px solid var(--rule); border-radius:12px; padding:14px; }
+
+/* verdict */
+.verdict{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:24px 0; }
+.verdict .v-card{ border-radius:14px; padding:24px; border:1px solid var(--rule); }
+.verdict .v-card.skill{ background:linear-gradient(160deg,rgba(26,169,126,.08),rgba(26,169,126,.02)); border-color:rgba(26,169,126,.35); }
+.verdict .v-card.mcp{ background:linear-gradient(160deg,rgba(46,91,255,.08),rgba(46,91,255,.02)); border-color:rgba(46,91,255,.35); }
+.verdict .v-card .vh{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:17px; margin-bottom:12px; }
+.verdict .v-card.skill .vh{ color:var(--accent3); }
+.verdict .v-card.mcp .vh{ color:var(--accent2); }
+.verdict .v-card ul{ margin:0; }
+.verdict .v-card ul li::before{ background:currentColor; }
+
+/* footer */
+footer{ background:#1B1A2B; color:#cfcce4; padding:48px 0 40px; border-top:none; margin-top:0; }
+footer h2{ color:#fff; font-size:22px; margin-bottom:18px; }
+footer .sources ol{ padding-left:1.2rem; font-size:.85rem; color:#9b98b3; }
+footer .sources li{ margin-bottom:.6rem; overflow-wrap:break-word; word-break:break-all; }
+footer .sources .src-title{ color:#e7e4f3; word-break:normal; }
+footer .sources .src-url{ display:block; margin-top:.15rem; font-size:.82rem; color:var(--accent); word-break:break-all; }
+footer .sources a{ word-break:break-all; }
+.foot-note{ font-size:13px; color:#7d7a96; margin-top:22px; padding-top:18px; border-top:1px solid #2f2d44; }
+
+@media (max-width:760px){
+  .hero h1{ font-size:32px; }
+  .grid2,.verdict{ grid-template-columns:1fr; }
+  .wrap{ padding:0 18px; }
+  section{ padding:40px 0; }
+  h2{ font-size:24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">通用 Skill · 技术对比报告</span>
+    <h1>lanhu-design-to-html Skill 介绍<br>与 <span class="grad">lanhu-mcp</span> 蓝湖设计稿获取对比</h1>
+    <p class="lead">一份围绕通用技能 <code style="background:rgba(255,95,0,.18);color:#FFB771">lanhu-design-to-html</code> 的完整介绍——它可在各种智能体中通用，并非某平台内置；并从定位、架构、数据获取方式、切图处理、协作能力等维度，与第三方开源的 lanhu-mcp 进行系统对比，帮助你在"还原设计稿为 HTML"场景下做出合理选型。</p>
+    <div class="meta-row">
+      <span>对比对象：<b>Skill vs MCP Server</b></span>
+      <span>场景：<b>蓝湖设计稿 → HTML</b></span>
+      <span>日期：<b>2026-07-04</b></span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 1. 概览 ===== -->
+<section>
+  <div class="wrap">
+    <h2><span class="num">01</span>概览：两条不同路线</h2>
+    <p class="h2-sub">两者都能"读取蓝湖设计稿"，但出发点和工作方式截然不同。</p>
+
+    <p>把蓝湖设计稿还原成 HTML，目前有两条主流路线。一条是 <mark class="key">通用的 lanhu-design-to-html Skill</mark>——它是一份写给 Agent 的"操作手册"，可在各种智能体中通用（非某平台内置），指导 Agent 用 playwright-cli 打开蓝湖网页、抓取 Sketch JSON、解析图层、下载切图到本地，最终产出可直接部署的 HTML 页面。另一条是 <mark class="key2">第三方开源的 lanhu-mcp（MCP Server）</mark>——它是一个常驻服务进程，通过蓝湖开放 API 把"设计稿/切图/需求文档/团队协作"封装成一组 MCP 工具，供 Cursor、Claude Code、Trae 等任意支持 MCP 的 AI 客户端调用<sup><a href="#cite-1">[1]</a></sup><sup><a href="#cite-2">[2]</a></sup>。</p>
+
+    <div class="grid2">
+      <div class="mini-card">
+        <div class="tag g">路线 A · Skill</div>
+        <div class="ttl">lanhu-design-to-html</div>
+        <div class="dsc">本地 Skill，"浏览器抓包 + 脚本解析 + 切图本地化 + 直出 HTML"。无外部服务，自包含、可离线。</div>
+      </div>
+      <div class="mini-card">
+        <div class="tag b">路线 B · MCP Server</div>
+        <div class="ttl">lanhu-mcp</div>
+        <div class="dsc">常驻 MCP 服务，封装蓝湖开放 API，提供设计稿/切图/需求分析/团队留言板等工具，跨 IDE 共享。</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="t">一句话区分</div>
+      <p style="margin:0;font-size:14.5px;color:var(--muted)">Skill 是"<strong style="color:var(--ink)">一份让 Agent 自己动手抓取并还原 HTML 的指南</strong>"；MCP 是"<strong style="color:var(--ink)">一个把蓝湖能力标准化成工具、供 AI 随时调用的服务</strong>"。前者重产出、自包含；后者重连接、重协作。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. Skill 介绍 ===== -->
+<section>
+  <div class="wrap">
+    <h2><span class="num">02</span>lanhu-design-to-html Skill 介绍</h2>
+    <p class="h2-sub">一份面向 Agent 的、从蓝湖链接直达可部署 HTML 的操作指南。</p>
+
+    <h3><span class="dot"></span>2.1 它是什么</h3>
+    <p><code>lanhu-design-to-html</code> 是一项可在各种智能体中通用的 Skill（非某平台内置），定位是"从蓝湖设计稿链接获取设计信息并还原为 HTML 页面"。当用户提供 <code>lanhuapp.com</code> 链接、或要求分析/还原蓝湖设计稿时被触发。它本身不是常驻进程，而是一套由 SKILL.md 主文档加三份参考文档（工作流、数据解析、HTML 实现）和两个 Node 脚本（解析、下载切图）组成的"操作手册"，指引 Agent 用 playwright-cli 完成全流程。</p>
+
+    <h3><span class="dot"></span>2.2 核心工作流</h3>
+    <p>整体链路为：<strong>蓝湖链接 → 打开浏览器 → 获取 Sketch JSON → 解析图层/样式 → 下载切图到本地 → 分析结构 → 生成 HTML → 验证效果</strong>。共七个步骤：</p>
+
+    <div class="steps">
+      <div class="step"><div class="n"></div><div class="body"><div class="t">打开蓝湖设计稿（含登录检测）</div><div class="d">以 <code>--persistent</code> 持久化模式打开浏览器导航到设计稿，等待 3-5 秒后检测登录状态；未登录则切 <code>--headed</code> 让用户手动登录，登录态会被保存，下次自动保持。</div></div></div>
+      <div class="step"><div class="n"></div><div class="body"><div class="t">获取 Sketch JSON 设计数据</div><div class="d">用 <code>playwright-cli requests</code> 找到含 <code>SketchJSON</code> / <code>alipic.lanhuapp.com</code> 的请求，再 <code>response-body</code> 拿到完整的图层/样式/切图数据。</div></div></div>
+      <div class="step"><div class="n"></div><div class="body"><div class="t">解析设计数据</div><div class="d">用 <code>parse-design.js</code> 解析，输出 <code>design-analysis.txt</code>（人类可读报告）与 <code>design-layers.json</code>（结构化数据）。</div></div></div>
+      <div class="step"><div class="n"></div><div class="body"><div class="t">下载切图到本地（必做）</div><div class="d">用 <code>download-images.js</code> 按 SVG &gt; PNG &gt; DDS 优先级下载到 <code>assets/images/</code>，并生成 <code>image-map.json</code>（URL → 本地路径映射）。</div></div></div>
+      <div class="step"><div class="n"></div><div class="body"><div class="t">分析图层结构</div><div class="d">识别画板尺寸、文本/图片/形状/分组图层，重点关注报告中的 <code>⭐ 切图可用</code> 标注。</div></div></div>
+      <div class="step"><div class="n"></div><div class="body"><div class="t">生成 HTML</div><div class="d">以画板尺寸为容器，按切图优先原则用 <code>&lt;img&gt;</code> 还原，无切图元素才用 CSS 文字/形状实现。</div></div></div>
+      <div class="step"><div class="n"></div><div class="body"><div class="t">验证效果</div><div class="d">起本地 HTTP 服务，用 playwright-cli 调整为移动端视口截图对比设计稿。</div></div></div>
+    </div>
+
+    <h3><span class="dot"></span>2.3 两条核心原则</h3>
+    <div class="card accent-l">
+      <h4>原则一：切图优先（最重要）</h4>
+      <p style="margin-bottom:8px">凡设计稿提供了切图的元素，<strong>直接用 <code>&lt;img&gt;</code> 实现，不要用 CSS 还原</strong>。切图能 100% 还原视觉效果（含特殊字体、复合边框、阴影、渐变叠加），CSS 还原常有偏差。</p>
+      <p style="margin:0;font-size:14px;color:var(--muted)">适用于所有图层类型：文本图层有切图→用切图（解决特殊字体不可用）；形状图层有切图→用切图；分组图层有切图→用整组一张图，不要拆分实现。</p>
+    </div>
+    <div class="card accent-l">
+      <h4>原则二：切图本地化（硬性要求）</h4>
+      <p style="margin:0">所有切图必须下载到本地 <code>assets/images/</code>，HTML 中只引用本地相对路径，<strong>严禁使用蓝湖 CDN 链接</strong>（如 <code>lanhu.oss-cn-beijing.aliyuncs.com</code>、<code>alipic.lanhuapp.com</code>）。原因是 CDN 链接可能因权限/防盗链/失效而无法显示，本地化后页面可离线运行、便于部署、加载更稳定。</p>
+    </div>
+
+    <h3><span class="dot"></span>2.4 关键能力清单</h3>
+    <ul>
+      <li><strong>Sketch JSON 全量解析</strong>：提取文本（字体/字号/颜色/对齐/行高/字间距/多样式）、形状（填充/渐变/圆角/边框/阴影）、图片切图（SVG/PNG/DDS）、分组层级（parentID 关系树）。</li>
+      <li><strong>切图批量下载 + 映射表</strong>：按优先级 SVG &gt; PNG &gt; DDS 选择 URL，文件名取自图层名（中文保留、自动去重），生成 <code>image-map.json</code> 供 HTML 替换。</li>
+      <li><strong>多平台单位切换</strong>：支持 iOS(pt)、Android(dp)、Web(px)、微信小程序(rpx，1px=2rpx)。</li>
+      <li><strong>登录态持久化</strong>：首次手动登录后写入磁盘，后续 headless 自动保持。</li>
+      <li><strong>本地验证闭环</strong>：起 HTTP 服务 + playwright-cli 视口截图 + 源码搜索 CDN 关键字做本地化校验。</li>
+    </div>
+
+    <h3><span class="dot"></span>2.5 依赖与前提</h3>
+    <ul>
+      <li><code>playwright-cli</code> 已安装（用于浏览器自动化与抓包）。</li>
+      <li>Node.js 已安装（用于运行解析/下载脚本）。</li>
+      <li>需有可登录的蓝湖账号（首次使用需手动登录一次）。</li>
+      <li>设计稿需带有 <code>fromEditor=true</code> 参数才能进入标注视图、拿到 Sketch JSON。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 3. lanhu-mcp 介绍 ===== -->
+<section>
+  <div class="wrap">
+    <h2><span class="num">03</span>对比对象：lanhu-mcp 介绍</h2>
+    <p class="h2-sub">第三方开源 MCP Server，让任意支持 MCP 的 AI 客户端都能读取蓝湖。</p>
+
+    <h3 class="alt"><span class="dot" style="background:var(--accent2)"></span>3.1 它是什么</h3>
+    <p><code>lanhu-mcp</code>（项目地址 github.com/dsphper/lanhu-mcp）是一个基于 <strong>Model Context Protocol (MCP)</strong> 协议的第三方开源服务器，专为蓝湖设计协作平台打造。它通过蓝湖开放 API 把"设计稿/切图/需求文档/团队协作"封装成一组标准化工具，供 Cursor、Windsurf、Claude Code、Trae、通义灵码、Cline 等任意支持 MCP 的 AI 客户端调用<sup><a href="#cite-1">[1]</a></sup><sup><a href="#cite-2">[2]</a></sup>。</p>
+
+    <h3 class="alt"><span class="dot" style="background:var(--accent2)"></span>3.2 核心能力</h3>
+    <div class="grid2">
+      <div class="mini-card">
+        <div class="tag b">UI 设计</div>
+        <div class="ttl">设计稿查看 + 切图提取</div>
+        <div class="dsc">批量下载 UI 设计图、自动识别导出切图、语义化命名；分析时可获取尺寸/间距/颜色/字体等精确参数，并转为 HTML+CSS 参考。</div>
+      </div>
+      <div class="mini-card">
+        <div class="tag b">需求分析</div>
+        <div class="ttl">Axure 原型智能解析</div>
+        <div class="dsc">自动提取原型，三种模式（开发/测试/探索），四阶段工作流（全局扫描→分组分析→反向验证→生成交付物），准确率 &gt;95%。</div>
+      </div>
+      <div class="mini-card">
+        <div class="tag b">团队协作</div>
+        <div class="ttl">团队留言板 / 知识库</div>
+        <div class="dsc">所有 AI 连同一 MCP 共享知识与上下文，支持 normal/task/question/urgent/knowledge 五种消息类型，可接飞书 @提醒。</div>
+      </div>
+      <div class="mini-card">
+        <div class="tag b">性能</div>
+        <div class="ttl">智能缓存 + 增量更新</div>
+        <div class="dsc">基于版本号的永久缓存、增量下载、并发处理；支持 Docker / 源码 / stdio 按需启动多种部署方式。</div>
+      </div>
+    </div>
+
+    <h3 class="alt"><span class="dot" style="background:var(--accent2)"></span>3.3 工具列表</h3>
+    <div class="table-wrap" style="max-height:420px">
+      <table>
+        <thead><tr><th>工具名称</th><th>类别</th><th>功能</th></tr></thead>
+        <tbody>
+          <tr><td><code>lanhu_resolve_invite_link</code></td><td>项目协作</td><td>解析邀请链接并加入项目</td></tr>
+          <tr><td><code>lanhu_get_pages</code></td><td>设计获取</td><td>获取原型页面列表</td></tr>
+          <tr><td><code>lanhu_get_ai_analyze_page_result</code></td><td>AI 分析</td><td>分析原型页面内容、提取需求</td></tr>
+          <tr><td><code>lanhu_get_designs</code></td><td>设计获取</td><td>获取 UI 设计图列表</td></tr>
+          <tr><td><code>lanhu_get_ai_analyze_design_result</code></td><td>AI 分析</td><td>分析 UI 设计图、返回设计参数 + HTML/CSS</td></tr>
+          <tr><td><code>lanhu_get_design_slices</code></td><td>资源获取</td><td>获取设计切图信息</td></tr>
+          <tr><td><code>lanhu_say</code></td><td>评论协作</td><td>发布留言、@提醒</td></tr>
+          <tr><td><code>lanhu_say_list / _detail / _edit / _delete</code></td><td>评论协作</td><td>查看 / 详情 / 编辑 / 删除留言</td></tr>
+          <tr><td><code>lanhu_get_members</code></td><td>团队管理</td><td>查看团队成员</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted)">需注意：lanhu-mcp 需 Python 3.10+、需手动配置蓝湖 Cookie，且明确要求使用支持视觉功能的 AI 模型（Claude / GPT / Gemini / Kimi / Qwen / DeepSeek 等），不支持纯文本模型<sup><a href="#cite-1">[1]</a></sup>。</p>
+  </div>
+</section>
+
+<!-- ===== 4. 对比分析 ===== -->
+<section>
+  <div class="wrap">
+    <h2><span class="num">04</span>对比分析</h2>
+    <p class="h2-sub">从定位、架构、数据获取、切图处理、协作能力等维度逐项对比。</p>
+
+    <h3><span class="dot"></span>4.1 工作流对比</h3>
+    <p>下图直观呈现两种方案从"蓝湖链接"到"HTML"的数据通路差异：</p>
+    <figure class="diagram">
+      <div class="mermaid-box">
+        <pre class="mermaid">
+flowchart LR
+  subgraph SK["lanhu-design-to-html (Skill)"]
+    direction TB
+    A1["蓝湖链接"] --> A2["playwright-cli<br/>打开浏览器抓包"]
+    A2 --> A3["取 Sketch JSON<br/>(完整图层/样式)"]
+    A3 --> A4["parse-design.js<br/>解析图层树"]
+    A4 --> A5["download-images.js<br/>切图下载到本地"]
+    A5 --> A6["Agent 直接生成<br/>可部署 HTML"]
+  end
+  subgraph MCP["lanhu-mcp (MCP Server)"]
+    direction TB
+    B1["蓝湖链接"] --> B2["MCP 工具调用<br/>(开放 API)"]
+    B2 --> B3["get_designs /<br/>analyze_design"]
+    B3 --> B4["返回设计参数<br/>+ HTML/CSS 参考"]
+    B4 --> B5["AI 参考实现<br/>(非直出)"]
+  end
+  SK -. 同为蓝湖设计稿 .-> MCP
+        </pre>
+      </div>
+      <figcaption>图 1：两种方案的工作流对比</figcaption>
+    </figure>
+
+    <h3><span class="dot"></span>4.2 能力维度雷达图</h3>
+    <figure class="chart-figure">
+      <figcaption>图 2：关键能力维度对比（5 分制，分越高越强）</figcaption>
+      <div class="ctn" id="chart-radar" style="width:100%;min-height:420px"></div>
+    </figure>
+
+    <h3><span class="dot"></span>4.3 多维度对比表</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>对比维度</th>
+            <th class="sk">lanhu-design-to-html <span class="badge skill">Skill</span></th>
+            <th class="mc">lanhu-mcp <span class="badge mcp">MCP</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">产品定位</td>
+            <td class="sk">本地操作手册：指导 Agent 抓取并直出 HTML</td>
+            <td class="mc">常驻服务：把蓝湖能力标准化为 MCP 工具</td>
+          </tr>
+          <tr>
+            <td class="label">数据获取方式</td>
+            <td class="sk">浏览器自动化抓包（playwright-cli 取 Sketch JSON）</td>
+            <td class="mc">蓝湖开放 API（经 Cookie 鉴权的 HTTP 接口）</td>
+          </tr>
+          <tr>
+            <td class="label">是否需常驻进程</td>
+            <td class="sk"><span class="no">否</span>，按需触发，无服务端</td>
+            <td class="mc"><span class="yes">是</span>，需启动 Server（Docker/源码/stdio）</td>
+          </tr>
+          <tr>
+            <td class="label">是否需额外账号/Cookie</td>
+            <td class="sk">仅需蓝湖账号登录态（首次登录持久化）</td>
+            <td class="mc">需手动从浏览器复制蓝湖 Cookie 配置</td>
+          </tr>
+          <tr>
+            <td class="label">切图本地化</td>
+            <td class="sk"><span class="yes">强制</span>，脚本批量下载 + image-map.json 映射，禁用 CDN</td>
+            <td class="mc"><span class="mid">可选</span>，提供切图工具，命名由 AI 决定</td>
+          </tr>
+          <tr>
+            <td class="label">切图优先策略</td>
+            <td class="sk"><span class="yes">内置硬性规则</span>，有切图必用 &lt;img&gt;，禁 CSS 还原</td>
+            <td class="mc"><span class="mid">无此约束</span>，交由 AI 自行判断</td>
+          </tr>
+          <tr>
+            <td class="label">HTML 产出形态</td>
+            <td class="sk">Agent 直出可部署 HTML（含本地 assets）</td>
+            <td class="mc">返回设计参数 + HTML/CSS 参考，AI 再据此实现</td>
+          </tr>
+          <tr>
+            <td class="label">设计参数精度</td>
+            <td class="sk">完整 Sketch JSON（图层/字体/颜色/圆角/阴影/渐变全字段）</td>
+            <td class="mc">组件尺寸/间距/颜色/字体等参数 + 转换后代码</td>
+          </tr>
+          <tr>
+            <td class="label">需求文档分析</td>
+            <td class="sk"><span class="no">不支持</span>，专注设计稿还原</td>
+            <td class="mc"><span class="yes">支持</span>，Axure 三模式分析、交付物</td>
+          </tr>
+          <tr>
+            <td class="label">团队协作 / 留言板</td>
+            <td class="sk"><span class="no">无</span></td>
+            <td class="mc"><span class="yes">核心特性</span>，跨 IDE 共享知识库、@飞书提醒</td>
+          </tr>
+          <tr>
+            <td class="label">多端单位切换</td>
+            <td class="sk">支持 iOS/Android/Web/小程序(pt/dp/px/rpx)</td>
+            <td class="mc">主要面向设计参数 + HTML/CSS</td>
+          </tr>
+          <tr>
+            <td class="label">客户端兼容性</td>
+            <td class="sk"><span class="yes">通用</span>，任意支持 Skill 的智能体（需 playwright-cli + Node）</td>
+            <td class="mc"><span class="yes">广泛</span>，任意支持 MCP 协议的 AI 工具</td>
+          </tr>
+          <tr>
+            <td class="label">部署/维护成本</td>
+            <td class="sk"><span class="yes">低</span>，零服务端，随 Skill 即用</td>
+            <td class="mc"><span class="mid">中</span>，需维护服务、Cookie、Python 环境</td>
+          </tr>
+          <tr>
+            <td class="label">离线可用</td>
+            <td class="sk"><span class="yes">是</span>（切图下载后）</td>
+            <td class="mc"><span class="no">否</span>，依赖在线 API</td>
+          </tr>
+          <tr>
+            <td class="label">Token 消耗</td>
+            <td class="sk"><span class="yes">低</span>，重活交给本地脚本，上下文只留文本摘要</td>
+            <td class="mc"><span class="mid">高</span>，含多模态图片预览 + 多轮工具调用累积</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3><span class="dot"></span>4.4 切图处理：最大差异点</h3>
+    <p>两者在"切图"这件事上的处理力度差异最大，这直接决定了 HTML 还原度：</p>
+    <div class="grid2">
+      <div class="card accent-l">
+        <h4>Skill：切图本地化是硬性要求</h4>
+        <ul style="margin:0">
+          <li>解析报告逐层标注 <code>⭐ 切图可用</code>，明确建议用 &lt;img&gt;</li>
+          <li>脚本统一下载，生成 URL→本地路径映射表</li>
+          <li>HTML 中严禁出现任何蓝湖 CDN 链接</li>
+          <li>验证阶段会在源码里搜 CDN 关键字做校验</li>
+          <li>失败项单独记录，可重试或手动补下载</li>
+        </ul>
+      </div>
+      <div class="card accent-b">
+        <h4>MCP：提供切图工具但无强制策略</h4>
+        <ul class="alt" style="margin:0">
+          <li><code>lanhu_get_design_slices</code> 可获取切图信息</li>
+          <li>命名由 AI 语义化生成，无统一映射表</li>
+          <li>是否本地化、是否用 &lt;img&gt; 均交由 AI 判断</li>
+          <li>无"切图优先于 CSS 还原"的内置约束</li>
+          <li>更侧重"把数据给到 AI"，而非约束产出规范</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3><span class="dot"></span>4.5 Token 消耗：成本视角对比</h3>
+    <p>两者在"把设计稿数据喂给 AI"的方式上差异，直接决定了单次任务的 token 消耗量级。下图以"<strong>还原一个中等复杂度的蓝湖画板（约 30-50 个图层）</strong>"为基准，估算上下文中各部分的 token 占比：</p>
+
+    <figure class="chart-figure">
+      <figcaption>图 3：单次还原一个画板的上下文 Token 消耗估算（堆叠柱状图，单位：千 token）</figcaption>
+      <div class="ctn" id="chart-token" style="width:100%;min-height:420px"></div>
+    </figure>
+
+    <div class="grid2">
+      <div class="card accent-l">
+        <h4>Skill：把重活交给本地脚本</h4>
+        <ul style="margin:0">
+          <li><strong>文本为主</strong>：上下文主要是 SKILL 文档、分析报告、命令输出，均为文本</li>
+          <li><strong>原始数据不进上下文</strong>：100KB+ 的 Sketch JSON 由 <code>parse-design.js</code> 在本地解析，Agent 只读摘要报告（几 KB）</li>
+          <li><strong>切图不进上下文</strong>：切图以文件形式下载到磁盘，上下文只记本地路径字符串</li>
+          <li><strong>单轮闭环</strong>：整个流程在一轮对话内完成，不跨会话累积</li>
+          <li>估算单次约 <strong>1.5万-4万 token</strong></li>
+        </ul>
+      </div>
+      <div class="card accent-b">
+        <h4>MCP：多模态 + 多轮累积</h4>
+        <ul class="alt" style="margin:0">
+          <li><strong>含图片预览</strong>：设计图以图片返回供视觉模型分析，单张预览图约 <strong>1k-3k token</strong>，多张累加显著</li>
+          <li><strong>多轮工具调用</strong>：<code>get_designs → analyze → get_slices → say</code> 每次返回都进上下文</li>
+          <li><strong>知识库增长</strong>：团队留言板内容随使用累积，查询时 token 消耗随之上升</li>
+          <li><strong>缓存不省 token</strong>：版本缓存只减少下载/解析耗时，返回给 AI 的内容仍需入上下文</li>
+          <li>估算单次约 <strong>5万-15万+ token</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="t">关键差异：脚本 vs 多模态</div>
+      <p style="margin:0;font-size:14.5px;color:var(--muted)">Skill 的设计哲学是"<strong style="color:var(--ink)">让本地脚本干重活，上下文只留必要的文本摘要</strong>"，因此 token 消耗低且稳定；MCP 的设计哲学是"<strong style="color:var(--ink)">把设计稿结果（含图片）直接交给 AI</strong>"，多模态内容天然占用更多 token，且随工具调用轮次与知识库规模增长。在按 token 计费的场景下，单次还原任务的 token 成本 Skill 通常低一个数量级。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. 选型建议 ===== -->
+<section>
+  <div class="wrap">
+    <h2><span class="num">05</span>选型建议</h2>
+    <p class="h2-sub">两者并非互斥，而是互补——按"目标产出"选择。</p>
+
+    <div class="verdict">
+      <div class="v-card skill">
+        <div class="vh"><span class="badge skill">推荐</span> 用 Skill 的场景</div>
+        <ul>
+          <li>目标是<strong>把某个蓝湖画板高保真还原成可直接部署的 HTML</strong></li>
+          <li>希望切图全部本地化、页面可离线、长期稳定</li>
+          <li>希望随取随用、零服务端，在任意支持 Skill 的智能体中即用</li>
+          <li>需要严格"切图优先"规范以保证 100% 视觉还原</li>
+        </ul>
+      </div>
+      <div class="v-card mcp">
+        <div class="vh"><span class="badge mcp">推荐</span> 用 MCP 的场景</div>
+        <ul class="alt">
+          <li>团队多 IDE（Cursor/Claude Code/Trae）<strong>需要共享蓝湖知识与上下文</strong></li>
+          <li>除设计稿外还要<strong>分析需求文档、生成测试用例</strong></li>
+          <li>需要团队留言板、@提醒、知识沉淀等协作能力</li>
+          <li>希望任何支持 MCP 的 AI 工具都能统一读取蓝湖</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout blue">
+      <div class="t">组合使用（最佳实践）</div>
+      <p style="margin:0;font-size:14.5px;color:var(--muted)">两者可并用：用 lanhu-mcp 快速获取设计稿/切图信息与需求文档，再交给 lanhu-design-to-html Skill 按"切图优先 + 本地化"的硬性规范完成 HTML 还原与验证。前者解决"连接与获取"，后者解决"规范与产出"。</p>
+    </div>
+
+    <h3><span class="dot"></span>小结</h3>
+    <p>从"还原设计稿为 HTML"这一核心目标看，<strong>lanhu-design-to-html Skill 在产出规范、切图本地化、还原度保障上更强</strong>，它是"为还原 HTML 而生"的；而 lanhu-mcp 在<strong>跨客户端连通、需求分析、团队协作</strong>上更全面，是"为蓝湖与 AI 协同而生"的。理解这条边界，就能在不同任务中各取所长。</p>
+  </div>
+</section>
+
+<!-- ===== FOOTER / SOURCES ===== -->
+<footer>
+  <div class="wrap">
+    <div class="sources">
+      <h2>参考资料</h2>
+      <ol>
+        <li id="cite-1">
+          <span class="src-title">dsphper, lanhu-mcp — 蓝湖MCP服务器2.0 项目 README。第三方开源 MCP Server，封装蓝湖开放 API，支持设计稿/切图/需求分析/团队留言板，兼容 Cursor/Claude Code/Trae 等。</span>
+          <a class="src-url" href="https://github.com/dsphper/lanhu-mcp" target="_blank" rel="noopener">https://github.com/dsphper/lanhu-mcp</a>
+        </li>
+        <li id="cite-2">
+          <span class="src-title">LYX_WIN，《手把手教你使用蓝湖MCP：完整功能清单与使用场景》，CSDN 博客。介绍 lanhu-mcp 的安装配置、工具功能清单（resolve_invite_link/get_pages/analyze_design/design_slices 等）及使用场景。</span>
+          <a class="src-url" href="https://blog.csdn.net/LYX_WIN/article/details/158698368" target="_blank" rel="noopener">https://blog.csdn.net/LYX_WIN/article/details/158698368</a>
+        </li>
+        <li id="cite-3">
+          <span class="src-title">lanhu-design-to-html Skill 内置文档（SKILL.md 及 references/ 目录）。通用技能，可在各种智能体中通用（非某平台内置），定义从蓝湖链接到 HTML 的完整工作流、切图本地化原则与 HTML 实现指南。本报告引用其全部内容。</span>
+          <span class="src-url">Skill 内置文档</span>
+        </li>
+      </ol>
+    </div>
+    <div class="foot-note">本报告基于 lanhu-design-to-html Skill 文档与 lanhu-mcp 公开资料生成，仅供技术选型参考。</div>
+  </div>
+</footer>
+
+<script src="./_shared/js/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad:true, theme:'neutral', securityLevel:'loose', flowchart:{ curve:'basis', useMaxWidth:true } });</script>
+<script src="./_shared/js/echarts.min.js"></script>
+<script src="assets/charts.js"></script>
+
+</body>
+</html>
